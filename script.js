@@ -62,7 +62,7 @@ const layer5 = new Layer(backgroundLayer5, 0.5);
 const layer6 = new Layer(backgroundLayer6, 0.6);
 const layer7 = new Layer(backgroundLayer7, 0.7);
 const layer8 = new Layer(backgroundLayer8, 0.8);
-const layer9 = new Layer(backgroundLayer9, 0.9);
+const layer9 = new Layer(backgroundLayer9, 1);
 
 const gameObjects = [
   layer1,
@@ -85,3 +85,14 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
+// for changing animation speed
+const slider = document.getElementById("slider");
+slider.value = gameSpeed;
+const showGameSpeed = document.getElementById("showGameSpeed");
+showGameSpeed.innerHTML = gameSpeed;
+
+slider.addEventListener("change", function (e) {
+  gameSpeed = e.target.value;
+  showGameSpeed.innerHTML = e.target.value;
+});
