@@ -43,6 +43,9 @@ class Layer {
     if (this.x2 <= -this.width) {
       this.x2 = this.width + this.x - this.speed;
     }
+
+    this.x = Math.floor(this.x - this.speed);
+    this.x2 = Math.floor(this.x2 - this.speed);
   }
 
   draw() {
@@ -51,9 +54,34 @@ class Layer {
   }
 }
 
+const layer1 = new Layer(backgroundLayer1, 0.1);
+const layer2 = new Layer(backgroundLayer2, 0.2);
+const layer3 = new Layer(backgroundLayer3, 0.3);
+const layer4 = new Layer(backgroundLayer4, 0.4);
+const layer5 = new Layer(backgroundLayer5, 0.5);
+const layer6 = new Layer(backgroundLayer6, 0.6);
+const layer7 = new Layer(backgroundLayer7, 0.7);
+const layer8 = new Layer(backgroundLayer8, 0.8);
+const layer9 = new Layer(backgroundLayer9, 0.9);
+
+const gameObjects = [
+  layer1,
+  layer2,
+  layer3,
+  layer4,
+  layer5,
+  layer6,
+  layer7,
+  layer8,
+  layer9,
+];
+
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  gameObjects.forEach((objects) => {
+    objects.update();
+    objects.draw();
+  });
   requestAnimationFrame(animate);
 }
-
 animate();
