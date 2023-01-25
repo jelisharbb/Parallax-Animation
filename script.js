@@ -23,19 +23,36 @@ backgroundLayer8.src = "images/tree_01.png";
 const backgroundLayer9 = new Image();
 backgroundLayer9.src = "images/road_01.png";
 
-let x = 0;
-let x2 = 1000;
+class Layer {
+  constructor(image, speedModifier) {
+    this.x = 0;
+    this.y = 0;
+    this.width = 1000;
+    this.height = 400;
+    this.x2 = this.width;
+    this.image = image;
+    this.speedModifier = speedModifier;
+    this.speed = gameSpeed * this.speedModifier;
+  }
+
+  update() {
+    this.speed = gameSpeed * this.speedModifier;
+    if (this.x <= -this.width) {
+      this.x = this.width + this.x2 - this.speed;
+    }
+    if (this.x2 <= -this.width) {
+      this.x2 = this.width + this.x - this.speed;
+    }
+  }
+
+  draw() {
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x2, this.y, this.width, this.height);
+  }
+}
 
 function animate() {
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-  ctx.drawImage(backgroundLayer1, x, 0);
-  ctx.drawImage(backgroundLayer1, x2, 0);
-
-  if (x < -1000) x = 1000 + x2 - gameSpeed;
-  else x -= gameSpeed;
-  if (x2 < -1000) x2 = 1000 + x - gameSpeed;
-  else x2 -= gameSpeed;
-
   requestAnimationFrame(animate);
 }
 
